@@ -1,0 +1,30 @@
+export const bulletStyles: string[] = [
+  "circle",
+  "disc",
+  "square",
+  "inherit",
+  "none",
+];
+
+export const numberStyles: string[] = [
+  "decimal",
+  "lower-alpha",
+  "lower-greek",
+  "lower-latin",
+  "lower-roman",
+  "upper-alpha",
+  "upper-greek",
+  "upper-latin",
+  "upper-roman",
+  "armenian",
+  "cjk-ideographic",
+  "decimal-leading-zero",
+  "georgian",
+  "hebrew",
+  "hiragana",
+  "hiragana-iroha",
+  "katakana",
+  "katakana-iroha",
+  "inherit",
+  "none",
+];
