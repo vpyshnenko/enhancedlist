@@ -1,19 +1,14 @@
 import { Arr } from "@ephox/katamari";
-import { bulletStyles, numberStyles } from "./ListStyleTypes";
+import { bulletStyles, numberStyles, commonStyles } from "./ListStyleTypes";
 import { Editor, Ui } from "tinymce";
+import * as Dialog from "./Dialog";
+import { styleValueToText } from "./ListStyleTypes";
 // import { Menu } from "tinymce/core/api/ui/Ui";
 
 const enum ListType {
   OrderedList = "OL",
   UnorderedList = "UL",
 }
-
-// <ListStyles>
-const styleValueToText = (styleValue) => {
-  return styleValue.replace(/\-/g, " ").replace(/\b\w/g, (chr) => {
-    return chr.toUpperCase();
-  });
-};
 
 const addSplitButton = (
   editor: Editor,
@@ -62,14 +57,21 @@ const addSplitButton = (
   });
 };
 
-const register = (editor) => {
+const register = (editor: Editor) => {
+  editor.ui.registry.addButton("enhlist", {
+    tooltip: "List style settings",
+    icon: "toc",
+    onAction: () => {
+      Dialog.open(editor);
+    },
+  });
   addSplitButton(
     editor,
     "enumlist",
     "Numbered list",
     "InsertOrderedList",
     ListType.OrderedList,
-    numberStyles
+    [...numberStyles, ...commonStyles]
   );
   addSplitButton(
     editor,
@@ -77,7 +79,7 @@ const register = (editor) => {
     "Bullet list",
     "InsertUnorderedList",
     ListType.UnorderedList,
-    bulletStyles
+    [...bulletStyles, ...commonStyles]
   );
 };
 

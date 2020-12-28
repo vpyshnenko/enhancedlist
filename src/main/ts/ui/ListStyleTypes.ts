@@ -1,12 +1,8 @@
-export const bulletStyles: string[] = [
-  "circle",
-  "disc",
-  "square",
-  "inherit",
-  "none",
-];
+import { Arr } from "@ephox/katamari";
 
-export const numberStyles: string[] = [
+const bulletStyles: string[] = ["disc", "circle", "square"];
+
+const numberStyles: string[] = [
   "decimal",
   "lower-alpha",
   "lower-greek",
@@ -25,6 +21,33 @@ export const numberStyles: string[] = [
   "hiragana-iroha",
   "katakana",
   "katakana-iroha",
-  "inherit",
-  "none",
 ];
+
+const commonStyles: string[] = ["inherit", "none"];
+
+const styleValueToText = (styleValue) => {
+  return styleValue.replace(/\-/g, " ").replace(/\b\w/g, (chr) => {
+    return chr.toUpperCase();
+  });
+};
+
+const getListStyleTypeItems = (): Array<{
+  value: string;
+  text: string;
+}> =>
+  Arr.map([...bulletStyles, ...numberStyles, ...commonStyles], (value) => ({
+    value,
+    text: styleValueToText(value),
+  }));
+
+const isOrderedListType = (listStyleType: string): boolean =>
+  Arr.contains(numberStyles, listStyleType);
+
+export {
+  bulletStyles,
+  numberStyles,
+  commonStyles,
+  styleValueToText,
+  isOrderedListType,
+  getListStyleTypeItems,
+};
