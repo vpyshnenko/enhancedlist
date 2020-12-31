@@ -1,5 +1,5 @@
 import { Editor } from "tinymce";
-import { getParentList } from "../core/Selection";
+import { getParentList, selectTarget } from "../core/Selection";
 import { getListStyleTypeItems, isOrderedListType } from "./ListStyleTypes";
 // import { SugarElement, SugarDocument, Traverse, Insert,  } from '@ephox/sugar';
 import { SelectorFilter, SugarElement, SelectorFind, Css } from "@ephox/sugar";
@@ -111,7 +111,7 @@ const open = (editor: Editor) => {
       },
     ],
     onSubmit: (api) => {
-      const { listStyleType, indent } = api.getData();
+      const { listStyleType, indent, target } = api.getData();
       const cmd = isOrderedListType(listStyleType)
         ? "InsertOrderedList"
         : "InsertUnorderedList";
@@ -119,7 +119,10 @@ const open = (editor: Editor) => {
       if (indent.length > 0) {
         params["list-item-attributes"] = { style: `padding-left: ${indent}` };
       }
+      const bmark = editor.selection.getBookmark();
+      selectTarget(target, currentList, editor);
       editor.execCommand(cmd, false, params);
+      editor.selection.moveToBookmark(bmark);
       api.close();
     },
   });
