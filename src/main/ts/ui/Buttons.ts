@@ -1,9 +1,8 @@
 import { Arr } from "@ephox/katamari";
 import { bulletStyles, numberStyles, commonStyles } from "./ListStyleTypes";
 import { Editor, Ui } from "tinymce";
-import * as Dialog from "./Dialog";
+import * as Dialog from "./Dialog/Main";
 import { styleValueToText } from "./ListStyleTypes";
-// import { Menu } from "tinymce/core/api/ui/Ui";
 
 const enum ListType {
   OrderedList = "OL",

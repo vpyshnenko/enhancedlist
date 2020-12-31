@@ -1,6 +1,6 @@
 import { Editor } from "tinymce";
 import { Arr, Optional } from "@ephox/katamari";
-import { SelectorFilter, SugarElement, SelectorFind, Css } from "@ephox/sugar";
+import { SelectorFilter, SugarElement } from "@ephox/sugar";
 
 const getClosestListRootElm = (editor: Editor, elm: Node) => {
   const parentTableCell = editor.dom.getParents(elm, "TD,TH");
