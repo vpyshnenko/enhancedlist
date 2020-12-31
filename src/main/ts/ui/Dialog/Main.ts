@@ -1,6 +1,6 @@
 import { Editor } from "tinymce";
 import { getParentList, selectTarget } from "../../core/Selection";
-import { getInitialData } from "./InitialData";
+import { InitialDataType, getInitialData } from "./InitialData";
 import { getTargetSelectBoxSettings } from "./TargetSelecBox";
 import { getListStyleTypeItems, isOrderedListType } from "../ListStyleTypes";
 import { SugarElement, SelectorFind } from "@ephox/sugar";

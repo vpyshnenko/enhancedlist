@@ -13,6 +13,18 @@ import { Optional } from "@ephox/katamari";
 //   ],
 // }
 
+type TargetType = "current" | "parent" | "children" | "all";
+type TargetMapType = {
+  [key in TargetType]: string;
+};
+
+const targetMap: TargetMapType = {
+  current: "Current list",
+  parent: "Current and parent lists",
+  children: "Current and children list",
+  all: "All lists",
+};
+console.log("current", targetMap.current);
 const getTargetSelectBoxSettings = (
   currentList: Optional<SugarElement<Element>>
 ) => {
