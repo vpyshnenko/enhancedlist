@@ -1,34 +1,22 @@
 import { SugarElement, SelectorFilter } from "@ephox/sugar";
-import { Optional } from "@ephox/katamari";
-
-// {
-//   type: "selectbox",
-//   name: "target",
-//   label: "Apply styles only to",
-//   items: [
-//     { value: "current", text: "Current list" },
-//     { value: "parent", text: "Current and parent lists" },
-//     { value: "children", text: "Current and children lists" },
-//     { value: "all", text: "All lists" },
-//   ],
-// }
+import { Arr, Optional } from "@ephox/katamari";
 
 type TargetType = "current" | "parent" | "children" | "all";
-type TargetMapType = {
+type TargetLabelMapType = {
   [key in TargetType]: string;
 };
 
-const targetMap: TargetMapType = {
+const targetLabelMap: TargetLabelMapType = {
   current: "Current list",
   parent: "Current and parent lists",
   children: "Current and children list",
   all: "All lists",
 };
-console.log("current", targetMap.current);
+
 const getTargetSelectBoxSettings = (
   currentList: Optional<SugarElement<Element>>
 ) => {
-  const targetItems = [{ value: "current", text: "Current list" }];
+  const targetItems: TargetType[] = ["current"];
   currentList
     .map((elm) => [
       SelectorFilter.ancestors(elm, "ol,ul"),
@@ -36,16 +24,13 @@ const getTargetSelectBoxSettings = (
     ])
     .map(([ancestors, descendants]) => {
       if (ancestors.length > 0) {
-        targetItems.push({ value: "parent", text: "Current and parent lists" });
+        targetItems.push("parent");
       }
       if (descendants.length > 0) {
-        targetItems.push({
-          value: "children",
-          text: "Current and children lists",
-        });
+        targetItems.push("children");
       }
       if (ancestors.length > 0 && descendants.length > 0) {
-        targetItems.push({ value: "all", text: "All lists" });
+        targetItems.push("all");
       }
     });
 
@@ -56,7 +41,10 @@ const getTargetSelectBoxSettings = (
             type: "selectbox",
             name: "target",
             label: "Apply styles only to",
-            items: targetItems,
+            items: Arr.map(targetItems, (v) => ({
+              value: v,
+              text: targetLabelMap[v],
+            })),
           },
         ]
       : [];
