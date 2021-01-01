@@ -1,5 +1,7 @@
 import { Arr } from "@ephox/katamari";
 
+const ListSel = "ol,ul";
+
 const bulletStyles: string[] = ["disc", "circle", "square"];
 
 const numberStyles: string[] = [
@@ -44,6 +46,7 @@ const isOrderedListType = (listStyleType: string): boolean =>
   Arr.contains(numberStyles, listStyleType);
 
 export {
+  ListSel,
   bulletStyles,
   numberStyles,
   commonStyles,

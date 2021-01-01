@@ -1,40 +1,28 @@
 import { Editor } from "tinymce";
 import { Arr, Optional } from "@ephox/katamari";
-import { SelectorFilter, SugarElement } from "@ephox/sugar";
+import { SelectorFilter, SugarElement, SelectorFind } from "@ephox/sugar";
 
-const getClosestListRootElm = (editor: Editor, elm: Node) => {
-  const parentTableCell = editor.dom.getParents(elm, "TD,TH");
-  const root =
-    parentTableCell.length > 0 ? parentTableCell[0] : editor.getBody();
-
-  return root;
-};
-
-const getParentList = (editor: Editor, node?: Node) => {
-  const selectionStart = node || editor.selection.getStart(true);
-
-  return editor.dom.getParent(
-    selectionStart,
-    "OL,UL",
-    getClosestListRootElm(editor, selectionStart)
-  );
-};
+const getParentList = (editor: Editor, listSel: string) =>
+  Optional.from(editor.selection.getStart(true))
+    .map(SugarElement.fromDom)
+    .bind((elm) => SelectorFind.closest(elm, listSel));
 
 const selectTarget = (
   target: string,
   currentList: Optional<SugarElement<Element>>,
-  editor: Editor
+  editor: Editor,
+  listSel: string
 ): void => {
   const rng = editor.selection.getRng();
   currentList
-    .bind((elm) => Arr.last(SelectorFilter.ancestors(elm, "ol,ul")))
+    .bind((elm) => Arr.last(SelectorFilter.ancestors(elm, listSel)))
     .map((root) => {
       if (target == "parent" || target == "all") {
         rng.setStartBefore(root.dom);
       }
     });
   currentList
-    .bind((elm) => Arr.last(SelectorFilter.descendants(elm, "ol,ul")))
+    .bind((elm) => Arr.last(SelectorFilter.descendants(elm, listSel)))
     .map((lastChild) => {
       if (target == "children" || target == "all") {
         rng.setEndAfter(lastChild.dom);

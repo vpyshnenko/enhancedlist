@@ -1,15 +1,15 @@
 import { Editor } from "tinymce";
 import { getParentList, selectTarget } from "../../core/Selection";
-import { InitialDataType, getInitialData } from "./InitialData";
+import { getInitialData } from "./InitialData";
 import { getTargetSelectBoxSettings } from "./TargetSelecBox";
-import { getListStyleTypeItems, isOrderedListType } from "../ListStyleTypes";
-import { SugarElement, SelectorFind } from "@ephox/sugar";
-import { Optional } from "@ephox/katamari";
+import {
+  getListStyleTypeItems,
+  isOrderedListType,
+  ListSel,
+} from "../ListStyleTypes";
 
 const open = (editor: Editor) => {
-  const currentList = Optional.from(editor.selection.getStart(true))
-    .map(SugarElement.fromDom)
-    .bind((elm) => SelectorFind.closest(elm, "ol,ul"));
+  const currentList = getParentList(editor, ListSel);
 
   editor.windowManager.open({
     title: "List style settings",
@@ -54,7 +54,7 @@ const open = (editor: Editor) => {
         params["list-item-attributes"] = { style: `padding-left: ${indent}` };
       }
       const bmark = editor.selection.getBookmark();
-      selectTarget(target, currentList, editor);
+      selectTarget(target, currentList, editor, ListSel);
       editor.execCommand(cmd, false, params);
       editor.selection.moveToBookmark(bmark);
       api.close();

@@ -1,5 +1,6 @@
 import { SugarElement, SelectorFilter } from "@ephox/sugar";
 import { Arr, Optional } from "@ephox/katamari";
+import { ListSel } from "../ListStyleTypes";
 
 type TargetType = "current" | "parent" | "children" | "all";
 type TargetLabelMapType = {
@@ -19,8 +20,8 @@ const getTargetSelectBoxSettings = (
   const targetItems: TargetType[] = ["current"];
   currentList
     .map((elm) => [
-      SelectorFilter.ancestors(elm, "ol,ul"),
-      SelectorFilter.descendants(elm, "ol,ul"),
+      SelectorFilter.ancestors(elm, ListSel),
+      SelectorFilter.descendants(elm, ListSel),
     ])
     .map(([ancestors, descendants]) => {
       if (ancestors.length > 0) {
