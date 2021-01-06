@@ -1,10 +1,11 @@
 import { SugarElement, SelectorFind, Css } from "@ephox/sugar";
-import { Optional, Arr } from "@ephox/katamari";
+import { Optional, Arr, Fun } from "@ephox/katamari";
+import { TargetType } from "../../core/Target";
 
 interface InitialDataType {
   listStyleType?: string;
   indent?: string;
-  target?: string;
+  target?: TargetType;
 }
 
 const getInitialData = (
@@ -18,7 +19,10 @@ const getInitialData = (
     .bind((elm) => SelectorFind.child(elm, "li[style*='padding-left']"))
     .map((elm) => Css.get(elm, "padding-left"));
 
-  return Arr.foldl(
+  return Arr.foldl<
+    { [key in keyof InitialDataType]: Optional<string> },
+    InitialDataType
+  >(
     [{ listStyleType }, { indent }],
     (acc, item) => {
       const [prop, opt] = Object.entries(item)[0];

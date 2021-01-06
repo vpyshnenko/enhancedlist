@@ -33,11 +33,10 @@ const styleValueToText = (styleValue) => {
   });
 };
 
-const getListStyleTypeItems = (): Array<{
+const listStyleTypeItems: Array<{
   value: string;
   text: string;
-}> =>
-  Arr.map([...bulletStyles, ...numberStyles, ...commonStyles], (value) => ({
+}> = Arr.map([...bulletStyles, ...numberStyles, ...commonStyles], (value) => ({
     value,
     text: styleValueToText(value),
   }));
@@ -52,5 +51,5 @@ export {
   commonStyles,
   styleValueToText,
   isOrderedListType,
-  getListStyleTypeItems,
+  listStyleTypeItems,
 };
