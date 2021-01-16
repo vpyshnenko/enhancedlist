@@ -1,6 +1,7 @@
 import { Editor } from "tinymce";
 import { Arr, Optional } from "@ephox/katamari";
 import { SelectorFilter, SugarElement, SelectorFind } from "@ephox/sugar";
+import {TargetType} from './Target'
 
 const getParentList = (editor: Editor, listSel: string) =>
   Optional.from(editor.selection.getStart(true))
@@ -8,7 +9,7 @@ const getParentList = (editor: Editor, listSel: string) =>
     .bind((elm) => SelectorFind.closest(elm, listSel));
 
 const selectTarget = (
-  target: string,
+  target: TargetType,
   currentList: Optional<SugarElement<Element>>,
   editor: Editor,
   listSel: string

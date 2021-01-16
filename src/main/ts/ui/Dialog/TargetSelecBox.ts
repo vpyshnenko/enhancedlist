@@ -1,55 +1,40 @@
 import { SugarElement, SelectorFilter } from "@ephox/sugar";
 import { Arr, Optional } from "@ephox/katamari";
-import { ListSel } from "../ListStyleTypes";
+import { ListSel } from "../../core/ListStyleTypes";
+import {TargetType} from '../../core/Target'
 
-type TargetType = "current" | "parent" | "children" | "all";
-type TargetLabelMapType = {
-  [key in TargetType]: string;
-};
 
-const targetLabelMap: TargetLabelMapType = {
+const labelMap: {[key in TargetType]: string}= {
   current: "Current list",
   parent: "Current and parent lists",
   children: "Current and children list",
   all: "All lists",
 };
 
-const getTargetSelectBoxSettings = (
-  currentList: Optional<SugarElement<Element>>
-) => {
-  const targetItems: TargetType[] = ["current"];
-  currentList
-    .map((elm) => [
-      SelectorFilter.ancestors(elm, ListSel),
-      SelectorFilter.descendants(elm, ListSel),
-    ])
-    .map(([ancestors, descendants]) => {
-      if (ancestors.length > 0) {
-        targetItems.push("parent");
-      }
-      if (descendants.length > 0) {
-        targetItems.push("children");
-      }
-      if (ancestors.length > 0 && descendants.length > 0) {
-        targetItems.push("all");
-      }
-    });
+const getSelectBoxItems = (currentListElm: SugarElement<Element>): TargetType[] => {
+    const hasAncestors = SelectorFilter.ancestors(currentListElm, ListSel).length > 0;
+    const hasDescendants = SelectorFilter.descendants(currentListElm, ListSel).length > 0;
+    return Arr.flatten([
+      [ 'current' ],
+      hasAncestors ? [ 'parent' ] : [],
+      hasDescendants ? [ 'children' ] : [],
+      hasAncestors && hasDescendants ? [ 'all' ] : []
+    ]);
+}
 
-  const targetSelectBoxSettings =
-    targetItems.length > 1
-      ? [
-          {
-            type: "selectbox",
-            name: "target",
-            label: "Apply styles only to",
-            items: Arr.map(targetItems, (v) => ({
-              value: v,
-              text: targetLabelMap[v],
-            })),
-          },
-        ]
-      : [];
-  return targetSelectBoxSettings;
-};
+const getTargetSelectBoxSettings = (currentList: Optional<SugarElement<Element>>) =>
+  currentList.map(getSelectBoxItems)
+  .filter((selectBoxItems) => selectBoxItems.length > 1)
+  .map((selectBoxItems) => {
+    return {
+      type: 'selectbox',
+      name: 'target',
+      label: 'Apply styles only to',
+      items: Arr.map(selectBoxItems, (value) => ({
+        value,
+        text: labelMap[value],
+      })),
+    }
+  }).toArray();
 
 export { getTargetSelectBoxSettings };

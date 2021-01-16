@@ -3,10 +3,10 @@ import { getParentList, selectTarget } from "../../core/Selection";
 import { getInitialData } from "./InitialData";
 import { getTargetSelectBoxSettings } from "./TargetSelecBox";
 import {
-  getListStyleTypeItems,
+  listStyleTypeItems,
   isOrderedListType,
   ListSel,
-} from "../ListStyleTypes";
+} from "../../core/ListStyleTypes";
 
 const open = (editor: Editor) => {
   const currentList = getParentList(editor, ListSel);
@@ -20,7 +20,7 @@ const open = (editor: Editor) => {
           type: "selectbox",
           name: "listStyleType",
           label: "List style type",
-          items: getListStyleTypeItems(),
+          items: listStyleTypeItems,
         },
         {
           type: "input",
@@ -49,10 +49,10 @@ const open = (editor: Editor) => {
       const cmd = isOrderedListType(listStyleType)
         ? "InsertOrderedList"
         : "InsertUnorderedList";
-      const params = { "list-style-type": listStyleType };
-      if (indent.length > 0) {
-        params["list-item-attributes"] = { style: `padding-left: ${indent}` };
-      }
+      const params = {
+        "list-style-type": listStyleType,
+        ...getListItemAttrs(indent),
+      };
       const bmark = editor.selection.getBookmark();
       selectTarget(target, currentList, editor, ListSel);
       editor.execCommand(cmd, false, params);
@@ -61,5 +61,12 @@ const open = (editor: Editor) => {
     },
   });
 };
+
+const getListItemAttrs = (indent: string) =>
+  indent.length > 0
+    ? {
+        "list-item-attributes": { style: `padding-left: ${indent}` },
+      }
+    : {};
 
 export { open };
