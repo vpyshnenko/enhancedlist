@@ -19,6 +19,7 @@
     "@ephox/mcagar": "latest",
     "@ephox/swag": "latest",
     "@ephox/tslint-rules": "latest",
+    "@tinymce/miniature": "^3.0.1",
     "awesome-typescript-loader": "^5.2.1",
     "grunt": "^1.1.0",
     "grunt-contrib-clean": "^2.0.0",
@@ -54,6 +55,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@ephox/katamari": "^7.1.1",
-    "@ephox/sugar": "^7.0.3"
+    "@ephox/sugar": "^7.0.3",
+    "tinymce-5": "npm:tinymce@^5.0.0"
   }
 }

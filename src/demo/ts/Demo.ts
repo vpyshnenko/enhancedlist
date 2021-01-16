@@ -7,8 +7,8 @@ Plugin();
 
 tinymce.init({
   selector: "textarea.tinymce",
-  plugins: "code lists advlist enhlist",
-  toolbar: "numlist bullist | enhlist ebullist enumlist | code",
+  plugins: "code lists advlist enhlist image",
+  toolbar: "numlist bullist | enhlist ebullist enumlist | code image",
   height: 500,
   advlist_number_styles: "default,lower-greek,lower-roman",
 });

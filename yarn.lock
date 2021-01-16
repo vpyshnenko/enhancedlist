@@ -23,7 +23,7 @@
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 
-"@ephox/agar@^5.1.1", "@ephox/agar@latest":
+"@ephox/agar@^5.0.1", "@ephox/agar@^5.1.1", "@ephox/agar@latest":
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/@ephox/agar/-/agar-5.1.1.tgz#6982b271d9f67301fb0af0fccf3c107a7bee8ad1"
   integrity sha512-EiGGg6cSKyrds2KVyPzzDZfbwFaS7T+SGGn1oB800fY9+0zsu/+/9FsSopKKkNOwr28UNXHjOvALFCWFmHstHg==
@@ -113,7 +113,7 @@
     "@ephox/katamari" "^7.1.1"
     tslib "^2.0.0"
 
-"@ephox/katamari@^7.1.1":
+"@ephox/katamari@^7.0.1", "@ephox/katamari@^7.1.1":
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/@ephox/katamari/-/katamari-7.1.1.tgz#0a05fb48044c5d3eaf5711f3db3869cdba799691"
   integrity sha512-R7o5scTSiLR2Ga88RjcKa2f/ufdkwz3KiuUvKzem2Few3tf0pIF/TI0PBk+tKCdonWD+9PXi+m3eHUpcH2LSww==
@@ -122,7 +122,7 @@
     "@ephox/wrap-promise-polyfill" "^2.2.0"
     tslib "^2.0.0"
 
-"@ephox/mcagar@latest":
+"@ephox/mcagar@^5.0.1", "@ephox/mcagar@latest":
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/@ephox/mcagar/-/mcagar-5.1.1.tgz#ae1fef28768ce97c9a122f83b7ef37e570645ceb"
   integrity sha512-Ply+ue3/+DTSV9kiIbTLKgPZaCUpfM8wamQY2On9hebHcbH7Cb4nIqlT9haNW6JSTfu3m9tzviSF3nMBv6rDew==
@@ -142,7 +142,7 @@
     "@ephox/katamari" "^7.1.1"
     tslib "^2.0.0"
 
-"@ephox/sugar@^7.0.3":
+"@ephox/sugar@^7.0.1", "@ephox/sugar@^7.0.3":
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/@ephox/sugar/-/sugar-7.0.3.tgz#7f820c983504f7ef2c8b48300241b47054129d28"
   integrity sha512-DDVTw4txDLk8Y1tttnU1lNSKN64AybPnarb04dt1agygYRSdvTi8ywmsNgYQVxpnRWEZs5bQhZXYBokYtE3rmg==
@@ -197,6 +197,16 @@
   integrity sha512-PyRA9sm1Yayuj5OIoJ1hGt2YISX45w9WcFbh6ddT0Z/0yaFxOtGLInr4jUfU1EAFVs0Yfyfev4RNwBlUaHdlDQ==
   dependencies:
     defer-to-connect "^2.0.0"
+
+"@tinymce/miniature@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@tinymce/miniature/-/miniature-3.0.1.tgz#1e24c89dd55d66941de9a0751dd45470260215ff"
+  integrity sha512-gXAZ7RNUKsar9uBm+oC1l1xWNBi/+5PRMkSayribH7JH4RYt+ROcP1OWTwGUsGMflhvhCf6DbudlwAj3SaQafw==
+  dependencies:
+    "@ephox/agar" "^5.0.1"
+    "@ephox/katamari" "^7.0.1"
+    "@ephox/mcagar" "^5.0.1"
+    "@ephox/sugar" "^7.0.1"
 
 "@types/archiver@^5.1.0":
   version "5.1.0"
@@ -5696,7 +5706,7 @@ tiny-lr@^1.1.1:
     object-assign "^4.1.0"
     qs "^6.4.0"
 
-tinymce@latest:
+"tinymce-5@npm:tinymce@^5.0.0", tinymce@latest:
   version "5.6.2"
   resolved "https://registry.yarnpkg.com/tinymce/-/tinymce-5.6.2.tgz#4c20c22e328c5d0baab204928dbc2b0ecbed18b4"
   integrity sha512-z7zvM5seOPiW86/vqf08kStwW5Zs5U9oQfuqh2rTj4jEcT2QzxT0v72i2zw3W6rbTLldkAej6edFZphj5ee5zg==
