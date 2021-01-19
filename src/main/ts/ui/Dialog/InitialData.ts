@@ -1,5 +1,5 @@
 import { SugarElement, SelectorFind, Css } from "@ephox/sugar";
-import { Optional, Arr, Fun } from "@ephox/katamari";
+import { Optional, Arr } from "@ephox/katamari";
 import { TargetType } from "../../core/Target";
 
 interface InitialDataType {
