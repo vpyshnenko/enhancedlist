@@ -35,8 +35,7 @@ UnitTest.asynctest("browser.ToolbarSplitBtnTest", (success, failure) => {
                   "Waiting for dropdown menu to appear",
                   ".tox-menu.tox-selected-menu"
                 ),
-                Log.chain(
-                  "TBA",
+                Chain.label(
                   "click Lower Alpha Style button",
                   Mouse.cClickOn(
                     "div[role='menuitemcheckbox'][title='Lower Alpha']"

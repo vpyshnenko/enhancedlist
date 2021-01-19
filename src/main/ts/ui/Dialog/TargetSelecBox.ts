@@ -32,7 +32,7 @@ const getTargetSelectBoxSettings = (
   currentList
     .map(getSelectBoxItems)
     .filter((selectBoxItems) => selectBoxItems.length > 1)
-    .map((selectBoxItems) => {
+    .map<Ui.Dialog.SelectBoxSpec>((selectBoxItems) => {
       return {
         type: "selectbox",
         name: "target",
@@ -41,7 +41,7 @@ const getTargetSelectBoxSettings = (
           value,
           text: labelMap[value],
         })),
-      } as Ui.Dialog.SelectBoxSpec;
+      };
     })
     .toArray();
 

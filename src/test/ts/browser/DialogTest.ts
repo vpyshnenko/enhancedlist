@@ -12,6 +12,7 @@ import { TinyLoader, TinyApis, TinyUi } from "@ephox/mcagar";
 import { UnitTest } from "@ephox/bedrock-client";
 import Plugin from "../../../main/ts/Plugin";
 import { SugarElement, SugarBody, Value, Focus } from "@ephox/sugar";
+import { TargetType } from "src/main/ts/core/Target";
 
 /*
   Test assigned to check correctness of style application to appropiate target from List Settings Dialog
@@ -65,7 +66,7 @@ UnitTest.asynctest("browser.TargetSelectBoxTest", (success, failure) => {
           cFakeEvent("change"),
         ]);
 
-      const sSetTargetValue = (value: string) =>
+      const sSetTargetValue = (value: TargetType) =>
         GeneralSteps.sequence([
           tinyApis.sSetContent(
             "<ul style='list-style-type: disc;'><li>A<ul style='list-style-type: circle;'><li>B<ul style='list-style-type: square;'><li>C</li></ul></li></ul></li></ul>"
@@ -85,7 +86,7 @@ UnitTest.asynctest("browser.TargetSelectBoxTest", (success, failure) => {
       const sAssertStructure = ([aBullet, bBullet, cBullet]: string[]) =>
         Step.sync(() => {
           Assertions.assertStructure(
-            "",
+            "three nested list with appropriate bullet styles",
             ApproxStructure.build((s, str, arr) =>
               s.element("ul", {
                 styles: {
